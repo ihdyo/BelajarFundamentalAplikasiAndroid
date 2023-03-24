@@ -13,7 +13,7 @@
         android:theme="@style/Theme.GithubUser">
 
         <activity
-            android:name="com.example.githubuser.ui.activity.UserDetailActivity"
+            android:name="com.example.githubuser.ui.activity.DetailActivity"
             android:exported="false" />
 
         <activity

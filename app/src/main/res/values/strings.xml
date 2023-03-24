@@ -2,21 +2,21 @@
     <string name="app_name">GitHub User</string>
     <string name="app_version">version 1.0</string>
     <string name="hint">Enter a GitHub username</string>
+    <string name="hint_main">Enter a GitHub username in the search box above to display a list of related searches</string>
     <string name="empty">User not found</string>
     <string name="profile">Profile</string>
-    <string name="title_follower">Followers</string>
-    <string name="title_following">Following</string>
-    <string name="follower_count">%d Followers</string>
-    <string name="following_count">%d Following</string>
     <string name="name">Name</string>
     <string name="username">Username</string>
     <string name="url">URL</string>
     <string name="search">Search</string>
     <string name="button">button</string>
-    <string name="hint_main">Enter a GitHub username in the search box above to display a list of related searches</string>
+    <string name="follower">Followers</string>
+    <string name="following">Following</string>
+    <string name="follower_count">%d Followers</string>
+    <string name="following_count">%d Following</string>
 
     <string-array name="tab_title">
-        <item>@string/title_follower</item>
-        <item>@string/title_following</item>
+        <item>@string/follower</item>
+        <item>@string/following</item>
     </string-array>
 </resources>

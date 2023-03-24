@@ -10,9 +10,6 @@
     <color name="gray_900">#FF0D1117</color>
 
     <color name="red_300">#FFFA7970</color>
-    <color name="orange_300">#FFFAA356</color>
     <color name="green_300">#FF7CE38B</color>
-    <color name="sky_300">#FFA2D2FB</color>
     <color name="blue_300">#FF77BDFB</color>
-    <color name="purple_300">#FFCEA5FB</color>
 </resources>

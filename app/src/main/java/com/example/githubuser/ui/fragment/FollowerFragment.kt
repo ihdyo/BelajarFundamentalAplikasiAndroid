@@ -8,62 +8,34 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.githubuser.adapter.FollowerAdapter
-import com.example.githubuser.model.GithubUser
-import com.example.githubuser.ui.activity.UserDetailActivity
-import com.example.githubuser.ui.viewmodel.FollowerViewModel
-import com.example.githubuser.utility.Helper
 import com.example.githubuser.databinding.FragmentFollowerBinding
-
+import com.example.githubuser.model.GithubUser
+import com.example.githubuser.ui.activity.DetailActivity
+import com.example.githubuser.model.viewmodel.FollowerViewModel
 
 class FollowerFragment : Fragment() {
-	private var _binding: FragmentFollowerBinding? = null
-	private val binding get() = _binding!!
+	private lateinit var binding: FragmentFollowerBinding
 	private lateinit var followerViewModel: FollowerViewModel
-	private val helper = Helper()
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
-		followerViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-			FollowerViewModel::class.java)
-	}
-
-	override fun onCreateView(
-		inflater: LayoutInflater, container: ViewGroup?,
-		savedInstanceState: Bundle?
-	): View {
-		_binding = FragmentFollowerBinding.inflate(inflater, container, false)
+	override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+		binding = FragmentFollowerBinding.inflate(inflater, container, false)
 		return binding.root
 	}
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-
-		followerViewModel.isLoading.observe(viewLifecycleOwner) {
-			helper.showLoading(it, binding.progressFollower)
+		followerViewModel = ViewModelProvider(this).get(FollowerViewModel::class.java)
+		followerViewModel.loading.observe(viewLifecycleOwner) { isLoading ->
+			binding.progressFollower.visibility = if (isLoading) View.VISIBLE else View.GONE
 		}
-		followerViewModel.listFollower.observe(viewLifecycleOwner) { listFollower ->
+		followerViewModel.follower.observe(viewLifecycleOwner) { listFollower ->
 			setDataToFragment(listFollower)
 		}
-
-		followerViewModel.getFollower(arguments?.getString(UserDetailActivity.EXTRA_FRAGMENT).toString())
+		followerViewModel.getFollower(arguments?.getString(DetailActivity.EXTRA_FRAGMENT).toString())
 	}
 
 	private fun setDataToFragment(listFollower: List<GithubUser>) {
-		val listUser = ArrayList<GithubUser>()
-		with(binding) {
-			for (user in listFollower) {
-				listUser.clear()
-				listUser.addAll(listFollower)
-			}
-			rvFollower.layoutManager = LinearLayoutManager(context)
-			val adapter = FollowerAdapter(listFollower)
-			rvFollower.adapter = adapter
-		}
+		binding.rvFollower.layoutManager = LinearLayoutManager(requireContext())
+		binding.rvFollower.adapter = FollowerAdapter(listFollower)
 	}
-
-	override fun onDestroy() {
-		super.onDestroy()
-		_binding = null
-	}
-
 }
